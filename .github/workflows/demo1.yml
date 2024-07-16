@@ -3,6 +3,13 @@ on:
   pull_request:
     types: [opened,edited]
   workflow_dispatch: #even if we dont have any customizing parameters we have to write like this
+  push:
+    branches: #branches mean consider these branches for push event, ignore others
+      - master
+      - 'release/*' # single asterisk allows any characters but not including slashes
+      - 'features/**' #double asterisk allows any characters including slashes
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
